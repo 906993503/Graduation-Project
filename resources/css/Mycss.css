@@ -1,0 +1,12 @@
+.base-body {
+    background-color: #f4f5f5;
+}
+
+.base-div {
+    background-color: white;
+    padding-top: 1rem;
+}
+
+.item {
+    word-wrap: break-word;
+}

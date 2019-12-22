@@ -1,0 +1,217 @@
+<template>
+  <sui-comment-group>
+    <h3 is="sui-header" dividing>评论</h3>
+
+    <sui-comment
+      v-for="item in comment_list"
+      :key="item.id"
+      :id="setId(item.id)"
+      @load="testJump(item.id)"
+    >
+      <sui-comment-avatar :src="item.user.avatar" />
+      <sui-comment-content>
+        <sui-comment-author>{{item.user.name}}</sui-comment-author>
+        <sui-comment-metadata>
+          <div>{{showdate(item.created_at)}}</div>
+        </sui-comment-metadata>
+        <sui-comment-text>{{item.content}}</sui-comment-text>
+      </sui-comment-content>
+    </sui-comment>
+
+    <sui-menu pagination floated="right">
+      <a is="sui-menu-item" title="第一页" icon="angle double left" @click="pageTop()"></a>
+      <a is="sui-menu-item" title="上一页" icon="angle left" @click="pageUp()"></a>
+      <a
+        is="sui-menu-item"
+        v-for="i in page_list"
+        :key="i"
+        @click="pageTo(i)"
+        :active="isActive(i)"
+      >{{i}}</a>
+      <a is="sui-menu-item" title="下一页" icon="angle right" @click="pageDown()"></a>
+      <a is="sui-menu-item" title="最后一页" icon="angle double right" @click="pageEnd()"></a>
+    </sui-menu>
+    <div style="clear:both;"></div>
+    <sui-form style="margin-top: 1rem;" v-if="user != null">
+      <sui-form-field>
+        <textarea v-model="txt"></textarea>
+      </sui-form-field>
+      <sui-button
+        content="添加评论"
+        label-position="left"
+        icon="edit"
+        floated="right"
+        primary
+        @click="addComment()"
+      />
+      <div style="clear:both;"></div>
+    </sui-form>
+  </sui-comment-group>
+</template>
+
+<script>
+import env from "../../../env";
+export default {
+  props: {
+    comment: Array,
+    user: Array,
+    text: Object
+  },
+  data() {
+    return {
+      page: 1,
+      limit: 20,
+      txt: ""
+    };
+  },
+  methods: {
+    showdate(t) {
+      var date = new Date(parseInt(t) * 1000);
+      var Y = date.getFullYear() + "-";
+      var M =
+        (date.getMonth() + 1 < 10
+          ? "0" + (date.getMonth() + 1)
+          : date.getMonth() + 1) + "-";
+      var D = date.getDate() + " ";
+      var h = date.getHours() + ":";
+      var m = date.getMinutes();
+      return Y + M + D + h + m;
+    },
+    setId(id) {
+      return "c" + id;
+    },
+    isActive(i) {
+      return i == this.page;
+    },
+    pageTop() {
+      this.page = 1;
+    },
+    pageUp() {
+      if (this.page - 1 >= 1) {
+        this.page = this.page - 1;
+      }
+    },
+    pageTo(page) {
+      this.page = page;
+    },
+    pageDown() {
+      var end =
+        Math.floor(this.rows / this.limit) + (this.rows % this.limit ? 1 : 0);
+      if (this.page + 1 <= end) {
+        this.page++;
+      }
+    },
+    pageEnd() {
+      var end =
+        Math.floor(this.rows / this.limit) + (this.rows % this.limit ? 1 : 0);
+      this.page = end;
+    },
+    commentJump(id) {
+      var find = "#c" + id;
+      var Ele = document.querySelector(find);
+      if (!!Ele) {
+        Ele.scrollIntoView(true);
+      }
+    },
+    addComment() {
+      var self = this;
+      if (self.txt.length < 6) {
+        var data = [];
+        data.push("评论至少6个字符");
+        env.$emit("msg", data);
+        return false;
+      }
+      axios({
+        method: "post",
+        url: "/home/addComment",
+        data: {
+          id: self.text.id,
+          be_user_id: self.text.user_id,
+          content: self.txt
+        }
+      })
+        .then(function(res) {
+          var data = res.data;
+          console.log(data.text);
+          self.txt = "";
+          self.$parent.getArticle();
+        });
+    },
+    postComment(cid) {
+      var self = this;
+      if (cid != null) {
+        var cnt = 0;
+        for (var i in this.comment) {
+          cnt++;
+          if (this.comment[i].id == cid) {
+            this.page =
+              Math.floor(cnt / this.limit) + (cnt % this.limit ? 1 : 0);
+            setTimeout(function() {
+              self.commentJump(cid);
+            }, 200);
+            break;
+          }
+        }
+      }
+    },
+    testJump(id) {
+      if (id == this.$route.params.cid) {
+      }
+    }
+  },
+  computed: {
+    page_list: function() {
+      var begin = 1;
+      var end =
+        Math.floor(this.rows / this.limit) + (this.rows % this.limit ? 1 : 0);
+      var list = [];
+      var w = 5;
+      if (end - begin + 1 <= w) {
+        for (var i = begin; i <= end; i++) {
+          list.push(i);
+        }
+        return list;
+      }
+      var l = this.page - 2;
+      var r = this.page + 2;
+      while (l < begin || r > end) {
+        if (l < begin) {
+          l++;
+          r++;
+        }
+        if (r > end) {
+          l--;
+          r--;
+        }
+      }
+      for (var i = l; i <= r; i++) {
+        list.push(i);
+      }
+      return list;
+    },
+    rows: function() {
+      return this.comment.length;
+    },
+    comment_list: function() {
+      return this.comment.slice(
+        (this.page - 1) * this.limit,
+        this.page * this.limit
+      );
+    }
+  },
+  created() {},
+  watch: {
+    $route(to, from) {
+      this.postComment(to.params.cid);
+    }
+  },
+  mounted() {
+    this.postComment(this.$route.params.cid);
+  }
+};
+</script>
+<style>
+.ui.comments {
+  max-width: unset;
+}
+</style>
