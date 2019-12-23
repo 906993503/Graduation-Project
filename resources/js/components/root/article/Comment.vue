@@ -14,9 +14,9 @@
         <sui-comment-metadata>
           <div>{{showdate(item.created_at)}}</div>
         </sui-comment-metadata>
-        <sui-comment-text>{{item.content}}</sui-comment-text>
+        <sui-comment-text v-html="item.content"></sui-comment-text>
         <sui-comment-actions>
-          <sui-comment-action>回复</sui-comment-action>
+          <sui-comment-action @click="toCommentThis(item.user.id,item.user.name,item.id)">回复</sui-comment-action>
         </sui-comment-actions>
       </sui-comment-content>
     </sui-comment>
@@ -35,10 +35,8 @@
       <a is="sui-menu-item" title="最后一页" icon="angle double right" @click="pageEnd()"></a>
     </sui-menu>
     <div style="clear:both;"></div>
-    <sui-form style="margin-top: 1rem;" v-if="user != null">
-      <sui-form-field>
-        <textarea v-model="txt"></textarea>
-      </sui-form-field>
+    <div class="comment" v-if="user != null" id="c0">
+      <quill-editor v-model="txt" ref="myQuillEditor" :options="editorOption"></quill-editor>
       <sui-button
         content="添加评论"
         label-position="left"
@@ -48,11 +46,16 @@
         @click="addComment()"
       />
       <div style="clear:both;"></div>
-    </sui-form>
+    </div>
   </sui-comment-group>
 </template>
 
 <script>
+import "quill/dist/quill.core.css";
+import "quill/dist/quill.snow.css";
+import "quill/dist/quill.bubble.css";
+
+import { quillEditor } from "vue-quill-editor";
 import env from "../../../env";
 export default {
   props: {
@@ -64,10 +67,35 @@ export default {
     return {
       page: 1,
       limit: 20,
-      txt: ""
+      be_user_id: this.text.user_id,
+      txt: "",
+      set_user: "",
+      editorOption: {
+        modules: {
+          toolbar: [
+            ["bold", "italic", "underline", "strike"],
+            ["blockquote", "code-block"]
+          ]
+        }
+      }
     };
   },
   methods: {
+    toCommentThis(user_id, user_name, comment_id) {
+      this.set_user = "@" + user_name + "</a>";
+      this.txt = this.txt.replace(/<a[^>]+>[\s\S]*<\/a>/g, "");
+      this.txt =
+        "<a href='/#/content/" +
+        this.text.id +
+        "/" +
+        comment_id +
+        "' target='_self'>@" +
+        user_name +
+        "</a><span style='display: inline;'>&nbsp;</span>" +
+        this.txt;
+      this.be_user_id = user_id;
+      this.commentJump(0);
+    },
     showdate(t) {
       var date = new Date(parseInt(t) * 1000);
       var Y = date.getFullYear() + "-";
@@ -129,7 +157,7 @@ export default {
         url: "/home/addComment",
         data: {
           id: self.text.id,
-          be_user_id: self.text.user_id,
+          be_user_id: self.be_user_id,
           content: self.txt
         }
       }).then(function(res) {
@@ -198,21 +226,49 @@ export default {
         (this.page - 1) * this.limit,
         this.page * this.limit
       );
+    },
+    editor() {
+      return this.$refs.myQuillEditor.quill;
     }
   },
   created() {},
   watch: {
     $route(to, from) {
       this.postComment(to.params.cid);
+    },
+    txt(newTxt, oldTxt) {
+      if (this.txt.match("</a>") !== null) {
+        if (this.txt.match(this.set_user) === null) {
+          this.be_user_id = this.text.user_id;
+          this.set_user = "";
+          this.txt = this.txt.replace(/<a[^>]+>[\s\S]*<\/a>/g, "");
+        }
+      }
     }
   },
   mounted() {
     this.postComment(this.$route.params.cid);
+  },
+  components: {
+    quillEditor
   }
 };
 </script>
 <style>
 .ui.comments {
   max-width: unset;
+}
+.comment {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+.comment .ql-container.ql-snow {
+  min-height: 8rem;
+}
+.comment .ql-editor {
+  min-height: 8rem;
+}
+.comment .ql-tooltip.ql-flip {
+  display: none !important;
 }
 </style>

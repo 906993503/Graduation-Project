@@ -198,7 +198,7 @@ class HomeController extends Controller
                 'be_user_id'                => $request->input('be_user_id'),
                 'content'                   => $request->input('content')
             ];
-
+            $param['content']               = str_replace("_blank", "_self", $param['content']);
             $comment                        = new Comment();
             $res                            = $comment->addComment($param);
 

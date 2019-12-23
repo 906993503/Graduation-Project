@@ -4646,9 +4646,15 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _env__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../env */ "./resources/js/env.js");
-//
-//
+/* harmony import */ var quill_dist_quill_core_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! quill/dist/quill.core.css */ "./node_modules/quill/dist/quill.core.css");
+/* harmony import */ var quill_dist_quill_core_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(quill_dist_quill_core_css__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var quill_dist_quill_snow_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! quill/dist/quill.snow.css */ "./node_modules/quill/dist/quill.snow.css");
+/* harmony import */ var quill_dist_quill_snow_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(quill_dist_quill_snow_css__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var quill_dist_quill_bubble_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! quill/dist/quill.bubble.css */ "./node_modules/quill/dist/quill.bubble.css");
+/* harmony import */ var quill_dist_quill_bubble_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(quill_dist_quill_bubble_css__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var vue_quill_editor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-quill-editor */ "./node_modules/vue-quill-editor/dist/vue-quill-editor.js");
+/* harmony import */ var vue_quill_editor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue_quill_editor__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _env__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../env */ "./resources/js/env.js");
 //
 //
 //
@@ -4702,6 +4708,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
+
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     comment: Array,
@@ -4712,10 +4722,24 @@ __webpack_require__.r(__webpack_exports__);
     return {
       page: 1,
       limit: 20,
-      txt: ""
+      be_user_id: this.text.user_id,
+      txt: "",
+      set_user: "",
+      editorOption: {
+        modules: {
+          toolbar: [["bold", "italic", "underline", "strike"], ["blockquote", "code-block"]]
+        }
+      }
     };
   },
   methods: {
+    toCommentThis: function toCommentThis(user_id, user_name, comment_id) {
+      this.set_user = "@" + user_name + "</a>";
+      this.txt = this.txt.replace(/<a[^>]+>[\s\S]*<\/a>/g, "");
+      this.txt = "<a href='/#/content/" + this.text.id + "/" + comment_id + "' target='_self'>@" + user_name + "</a><span style='display: inline;'>&nbsp;</span>" + this.txt;
+      this.be_user_id = user_id;
+      this.commentJump(0);
+    },
     showdate: function showdate(t) {
       var date = new Date(parseInt(t) * 1000);
       var Y = date.getFullYear() + "-";
@@ -4767,7 +4791,7 @@ __webpack_require__.r(__webpack_exports__);
       if (self.txt.length < 6) {
         var data = [];
         data.push("评论至少6个字符");
-        _env__WEBPACK_IMPORTED_MODULE_0__["default"].$emit("msg", data);
+        _env__WEBPACK_IMPORTED_MODULE_4__["default"].$emit("msg", data);
         return false;
       }
 
@@ -4776,7 +4800,7 @@ __webpack_require__.r(__webpack_exports__);
         url: "/home/addComment",
         data: {
           id: self.text.id,
-          be_user_id: self.text.user_id,
+          be_user_id: self.be_user_id,
           content: self.txt
         }
       }).then(function (res) {
@@ -4849,16 +4873,31 @@ __webpack_require__.r(__webpack_exports__);
     },
     comment_list: function comment_list() {
       return this.comment.slice((this.page - 1) * this.limit, this.page * this.limit);
+    },
+    editor: function editor() {
+      return this.$refs.myQuillEditor.quill;
     }
   },
   created: function created() {},
   watch: {
     $route: function $route(to, from) {
       this.postComment(to.params.cid);
+    },
+    txt: function txt(newTxt, oldTxt) {
+      if (this.txt.match("</a>") !== null) {
+        if (this.txt.match(this.set_user) === null) {
+          this.be_user_id = this.text.user_id;
+          this.set_user = "";
+          this.txt = this.txt.replace(/<a[^>]+>[\s\S]*<\/a>/g, "");
+        }
+      }
     }
   },
   mounted: function mounted() {
     this.postComment(this.$route.params.cid);
+  },
+  components: {
+    quillEditor: vue_quill_editor__WEBPACK_IMPORTED_MODULE_3__["quillEditor"]
   }
 });
 
@@ -11469,7 +11508,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.ui.comments {\r\n  max-width: unset;\n}\r\n", ""]);
+exports.push([module.i, "\n.ui.comments {\r\n  max-width: unset;\n}\n.comment {\r\n  margin-top: 1rem;\r\n  margin-bottom: 0.5rem;\n}\n.comment .ql-container.ql-snow {\r\n  min-height: 8rem;\n}\n.comment .ql-editor {\r\n  min-height: 8rem;\n}\n.comment .ql-tooltip.ql-flip {\r\n  display: none !important;\n}\r\n", ""]);
 
 // exports
 
@@ -64241,11 +64280,29 @@ var render = function() {
                   _c("div", [_vm._v(_vm._s(_vm.showdate(item.created_at)))])
                 ]),
                 _vm._v(" "),
-                _c("sui-comment-text", [_vm._v(_vm._s(item.content))]),
+                _c("sui-comment-text", {
+                  domProps: { innerHTML: _vm._s(item.content) }
+                }),
                 _vm._v(" "),
                 _c(
                   "sui-comment-actions",
-                  [_c("sui-comment-action", [_vm._v("回复")])],
+                  [
+                    _c(
+                      "sui-comment-action",
+                      {
+                        on: {
+                          click: function($event) {
+                            return _vm.toCommentThis(
+                              item.user.id,
+                              item.user.name,
+                              item.id
+                            )
+                          }
+                        }
+                      },
+                      [_vm._v("回复")]
+                    )
+                  ],
                   1
                 )
               ],
@@ -64324,30 +64381,20 @@ var render = function() {
       _vm._v(" "),
       _vm.user != null
         ? _c(
-            "sui-form",
-            { staticStyle: { "margin-top": "1rem" } },
+            "div",
+            { staticClass: "comment", attrs: { id: "c0" } },
             [
-              _c("sui-form-field", [
-                _c("textarea", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.txt,
-                      expression: "txt"
-                    }
-                  ],
-                  domProps: { value: _vm.txt },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.txt = $event.target.value
-                    }
-                  }
-                })
-              ]),
+              _c("quill-editor", {
+                ref: "myQuillEditor",
+                attrs: { options: _vm.editorOption },
+                model: {
+                  value: _vm.txt,
+                  callback: function($$v) {
+                    _vm.txt = $$v
+                  },
+                  expression: "txt"
+                }
+              }),
               _vm._v(" "),
               _c("sui-button", {
                 attrs: {

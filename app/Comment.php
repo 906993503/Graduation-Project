@@ -50,6 +50,7 @@ class Comment extends Model
         foreach ($comments as $k => $v) {
             $comments[$k]->user;
             $comments[$k]->be_user;
+            $comments[$k]->content  = strip_tags($v->content);
         }
         return [
             'list' => $comments,
