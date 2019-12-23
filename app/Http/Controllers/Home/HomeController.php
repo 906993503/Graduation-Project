@@ -62,6 +62,10 @@ class HomeController extends Controller
         try {
             $path                           = $request->file('avatar')->store('public/avatar');
             $url                            = Storage::url($path);
+            $user                           = Auth::user() ?: Auth::guard('admin')->user();
+            $u                              = User::find($user->id);
+            $u->avatar                      = $url;
+            $u->save();
             return response()->json(['url' => $url]);
         } catch (Exception $e) {
             report($e);
