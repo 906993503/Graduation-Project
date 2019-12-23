@@ -49,6 +49,11 @@
                   <a class="user-edit" @click="resetSave()" v-if="editPW == true">保存</a>
                 </sui-table-cell>
               </sui-table-row>
+              <sui-table-row>
+                <sui-table-cell :width="2">电子邮箱:</sui-table-cell>
+                <sui-table-cell>{{user.email}}</sui-table-cell>
+                <sui-table-cell :width="2"></sui-table-cell>
+              </sui-table-row>
             </sui-table-body>
           </sui-table>
         </sui-grid-column>
@@ -113,7 +118,6 @@ export default {
       this.editName = true;
     },
     saveNameAction() {
-      console.log(this.name);
       var self = this;
       axios({
         method: "post",

@@ -63,7 +63,6 @@ export default {
       });
     });
     env.$on("submitType", data => {
-      console.log(data);
       axios({
         method: "post",
         url: "/manage/saveType",
@@ -90,7 +89,6 @@ export default {
     env.$off("submitType");
     env.$off("typeSearch");
     env.$off("page");
-    console.log("destroyed");
   },
   methods: {
     getTypeList() {
@@ -114,7 +112,6 @@ export default {
         url: "/open/getType"
       }).then(function(res) {
         var data = res.data;
-        console.log(data.type);
         env.$emit("type", data.type);
       });
     }

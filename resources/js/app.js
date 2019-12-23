@@ -3,9 +3,6 @@ require('./bootstrap');
 window.Vue = require('vue');
 import VueRouter from 'vue-router';
 import SuiVue from 'semantic-ui-vue';
-import Global from './Global.vue';
-import '../css/Mycss.css';
-import 'semantic-ui-css/semantic.min.css';
 import Tips from './components/Tips.vue';
 import env from "./env";
 
@@ -35,10 +32,12 @@ axios.interceptors.response.use(function (response) {
 Vue.use(VueRouter);
 Vue.use(SuiVue);
 
-import routes from './route';
+import {
+    home
+} from './route';
 
 const router = new VueRouter({
-    routes: routes
+    routes: home
 })
 
 const app = new Vue({
@@ -58,7 +57,14 @@ const app = new Vue({
     created() {
         var self = this;
         env.$on("user", user => {
-            self.user = user;
+            if (user == null) {
+                self.user = null;
+            } else {
+                self.user = [];
+                for (var i in user) {
+                    self.$set(self.user, i, user[i]);
+                }
+            }
         });
         if (self.user === null) {
             axios({
@@ -68,17 +74,12 @@ const app = new Vue({
                 .then(function (res) {
                     var data = res.data;
                     if (data.status) {
-
-                        var user = [];
+                        self.user = [];
                         for (var i in data.user) {
-                            user[i] = data.user[i];
+                            self.$set(self.user, i, data.user[i]);
                         }
-
-                        self.user = user;
-                        console.log(self.user);
                     }
                 });
-
         }
         env.$on("type", type => {
             self.type = type;
@@ -90,12 +91,10 @@ const app = new Vue({
             }).then(function (res) {
                 var data = res.data;
                 self.type = data.type;
-                console.log(self.type);
             });
         }
         env.$on("load", n => {
             self.load_flag += n;
-            console.log(self.load_flag);
         });
     },
     mounted() {
@@ -122,6 +121,5 @@ const app = new Vue({
         env.$off("user");
         env.$off("type");
         env.$off("load");
-        console.log("destroyed");
     },
 });

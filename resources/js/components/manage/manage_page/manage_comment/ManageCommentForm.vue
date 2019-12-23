@@ -29,7 +29,6 @@ export default {
       if (this.search != "") {
         data.search = this.search;
       }
-      console.log(data);
       env.$emit("commentSearch", data);
     }
   },

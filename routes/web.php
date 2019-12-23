@@ -14,7 +14,9 @@
 Route::get('/', function () {
     return view('index');
 });
-
+Route::get('/manage', function () {
+    return view('manage');
+});
 Auth::routes(['verify' => true]);
 
 Route::post('/open/getUser', 'Open\OpenController@getUser');
@@ -38,6 +40,7 @@ Route::post('/manage/delComment', 'Manage\ManageController@delComment');
 
 Route::post('/home/upload', 'Home\HomeController@upload');
 Route::post('/home/uploadFace', 'Home\HomeController@uploadFace');
+Route::post('/home/uploadAvatar', 'Home\HomeController@uploadAvatar');
 Route::post('/home/saveArticle', 'Home\HomeController@saveArticle');
 Route::post('/home/editArticle', 'Home\HomeController@editArticle');
 Route::post('/home/getCollectArticleItemList', 'Home\HomeController@getCollectArticleItemList');

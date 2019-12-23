@@ -19,7 +19,8 @@ import Reset from './components/auth/Reset.vue';
 import Search from './components/root/search/Search.vue';
 
 
-export default [{
+
+var home = [{
     path: '/',
     name: "root",
     component: Root,
@@ -75,6 +76,19 @@ export default [{
         component: Search
     }]
 }, {
+    path: '/login',
+    name: "Login",
+    component: Login
+}, {
+    path: '/register',
+    name: "Register",
+    component: Register
+}, {
+    path: '/password/reset/:token?',
+    name: "Reset",
+    component: Reset
+}];
+var manage = [{
     path: '/manage',
     name: "Manage",
     component: Manage,
@@ -95,16 +109,8 @@ export default [{
         name: "ManageUser",
         component: ManageUser
     }]
-}, {
-    path: '/login',
-    name: "Login",
-    component: Login
-}, {
-    path: '/register',
-    name: "Register",
-    component: Register
-}, {
-    path: '/password/reset/:token?',
-    name: "Reset",
-    component: Reset
 }];
+export {
+    home,
+    manage
+}

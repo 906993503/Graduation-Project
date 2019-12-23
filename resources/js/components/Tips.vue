@@ -33,7 +33,6 @@ export default {
   },
   destroyed() {
     env.$off("msg");
-    console.log("destroyed");
   }
 };
 </script>

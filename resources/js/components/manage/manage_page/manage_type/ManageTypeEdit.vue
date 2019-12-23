@@ -65,7 +65,6 @@ export default {
   },
   destroyed() {
     env.$off("editType");
-    console.log("destroyed");
   }
 };
 </script>

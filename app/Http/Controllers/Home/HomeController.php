@@ -45,7 +45,6 @@ class HomeController extends Controller
      */
     public function uploadFace(Request $request)
     {
-
         try {
             $path                           = $request->file('faceimg')->store('public/faceimg');
             $url                            = Storage::url($path);
@@ -55,7 +54,20 @@ class HomeController extends Controller
             return false;
         }
     }
-
+    /**
+     * 用户头像上传
+     */
+    public function uploadAvatar(Request $request)
+    {
+        try {
+            $path                           = $request->file('avatar')->store('public/avatar');
+            $url                            = Storage::url($path);
+            return response()->json(['url' => $url]);
+        } catch (Exception $e) {
+            report($e);
+            return false;
+        }
+    }
     /**
      *文章保存
      */

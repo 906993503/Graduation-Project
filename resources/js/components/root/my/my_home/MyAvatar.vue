@@ -11,13 +11,14 @@
     <avatar-cutter
       v-if="showCutter"
       @cancel="showCutter = false"
-      return-type="url"
+      return-type="file"
       @enter="uploadAvatar"
     ></avatar-cutter>
   </div>
 </template>
 <script>
 import AvatarCutter from "../../avatar-cutter/avatar-cutter";
+import env from "../../../../env";
 
 export default {
   props: {
@@ -39,10 +40,26 @@ export default {
 
   methods: {
     // 上传裁剪好的头像
-    uploadAvatar(src) {
-      console.log(src);
-      this.imgSrc = src;
-      this.showCutter = false;
+    uploadAvatar(file) {
+      var self = this;
+
+      let formData = new FormData();
+      formData.append("avatar", file);
+      axios
+        .post("/home/uploadAvatar", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data"
+          }
+        })
+        .then(function(res) {
+          var u = self.user;
+
+          self.imgSrc = res.data.url;
+          u.avatar = res.data.url;
+          env.$emit("user", u);
+
+          self.showCutter = false;
+        });
     },
     showUp() {
       this.isShowUp.display = "block";

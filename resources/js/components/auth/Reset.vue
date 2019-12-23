@@ -118,7 +118,6 @@ export default {
         data: data
       }).then(function(res) {
         var data = res.data;
-        console.log(data);
         if (data.status) {
           var user = [];
           for (var i in data.user) {

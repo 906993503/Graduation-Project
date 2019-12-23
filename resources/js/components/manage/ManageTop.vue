@@ -23,22 +23,16 @@ export default {
   },
   methods: {
     goHome() {
-      this.$router.push({
-        name: "Home"
-      });
+      window.location.href = "/";
     },
     logout() {
       var self = this;
       axios({
         method: "post",
         url: "/logout"
-      })
-        .then(function(res) {
-          env.$emit("user", null);
-          self.$router.push({
-            name: "Home"
-          });
-        });
+      }).then(function(res) {
+        window.location.href = "/";
+      });
     },
     menuSwitch() {
       env.$emit("menu_switch", !this.menu_switch);

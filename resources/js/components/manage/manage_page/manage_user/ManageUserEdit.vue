@@ -52,7 +52,6 @@ export default {
   },
   destroyed() {
     env.$off("editUser");
-    console.log("destroyed");
   }
 };
 </script>

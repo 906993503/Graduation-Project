@@ -135,7 +135,6 @@ export default {
     env.$off("delComment");
     env.$off("page");
     env.$off("commentSearch");
-    console.log("destroyed");
   }
 };
 </script>

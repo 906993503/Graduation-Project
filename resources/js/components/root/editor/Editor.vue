@@ -108,8 +108,6 @@ export default {
 
       let formData = new FormData();
       formData.append("faceimg", file);
-
-      console.log(file);
       axios
         .post("/home/uploadFace", formData, {
           headers: {
@@ -146,7 +144,6 @@ export default {
         return false;
       }
 
-      console.log(data);
       axios({
         url: "/home/saveArticle",
         method: "post",
@@ -157,7 +154,6 @@ export default {
           self.$router.push({
             name: "MyArticle"
           });
-          console.log(data);
         });
     }
   },
@@ -168,7 +164,6 @@ export default {
   },
   watch: {
     faceimg: function() {
-      console.log(233);
       let img = new Image();
       img.src = this.faceimg;
       const self = this;
@@ -225,7 +220,6 @@ export default {
             self.reason = data.article.reason;
             self.active = data.article.active;
           } else {
-            console.log(data);
             self.$router.push({
               name: "Home"
             });

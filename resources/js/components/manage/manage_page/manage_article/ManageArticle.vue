@@ -112,7 +112,6 @@ export default {
   created() {
     var self = this;
     self.getArticleList();
-    console.log("create");
     env.$on("submitArticleBan", data => {
       axios({
         method: "post",
@@ -156,7 +155,6 @@ export default {
 
     env.$on("page", page => {
       self.res.page = page;
-      console.log("page");
       self.getArticleList();
     });
 
@@ -172,7 +170,6 @@ export default {
     env.$off("articleSearch");
     env.$off("page");
 
-    console.log("destroyed");
   },
   methods: {
     getArticleList() {

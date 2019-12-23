@@ -69,7 +69,6 @@ export default {
         data.end_date = Math.round(d.valueOf() / 1000) - 8 * 60 * 60;
       }
 
-      console.log(data);
       env.$emit("articleSearch", data);
     }
   },

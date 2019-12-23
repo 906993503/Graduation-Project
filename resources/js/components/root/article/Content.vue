@@ -40,7 +40,6 @@ export default {
       })
         .then(function(res) {
           var data = res.data;
-          console.log(data.text);
           if (data.status) {
             self.text = data.text;
           } else {

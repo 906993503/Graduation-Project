@@ -82,7 +82,7 @@ class OpenController extends Controller
         }
     }
     /**
-     * 
+     * 获取文章详情
      */
     public function getArticle(Request $request)
     {
@@ -99,7 +99,7 @@ class OpenController extends Controller
         }
     }
     /**
-     * 
+     * 获取搜索文章列表
      */
     public function toSearch(Request $request)
     {

@@ -21,9 +21,9 @@
           <sui-icon name="search" @click="toSearch()" />
         </sui-menu-item>
         <div class="avatar-box item" style="padding: 0;" v-if="user !== null">
-          <img :src="user.avatar" style="width: 100%;height: 100%;" />
+          <img :src="useravatar" style="width: 100%;height: 100%;" />
         </div>
-        <sui-dropdown class="item" :text="user.name" style="width:11rem;" v-if="user !== null">
+        <sui-dropdown class="item" :text="username" style="width:11rem;" v-if="user !== null">
           <sui-dropdown-menu>
             <sui-dropdown-item @click.native="myHome()">
               <sui-icon name="user" />我的主页
@@ -68,6 +68,14 @@ export default {
       search: ""
     };
   },
+  computed: {
+    username() {
+      return this.user.name;
+    },
+    useravatar() {
+      return this.user.avatar;
+    }
+  },
   methods: {
     toSearch() {
       this.$router.push({
@@ -109,11 +117,7 @@ export default {
       }
     },
     manage() {
-      if (this.$router.history.current.name !== "Manage") {
-        this.$router.push({
-          name: "Manage"
-        });
-      }
+      window.location.href = "/manage/#/manage";
     },
     logout() {
       var self = this;

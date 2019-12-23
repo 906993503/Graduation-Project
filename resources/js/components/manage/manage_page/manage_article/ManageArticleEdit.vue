@@ -74,13 +74,11 @@ export default {
 
     env.$on("label", label => {
       self.label = label;
-      console.log(self.label);
     });
   },
   destroyed() {
     env.$off("editArticle");
     env.$off("label");
-    console.log("destroyed");
   },
   components: {
     "label-item": LabelItem

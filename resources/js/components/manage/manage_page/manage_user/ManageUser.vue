@@ -87,10 +87,8 @@ export default {
   },
   created() {
     var self = this;
-    console.log("create");
     self.getUserList();
     env.$on("banUser", id => {
-      console.log('banuser');
       axios({
         method: "post",
         url: "/manage/banUser",
@@ -114,7 +112,6 @@ export default {
 
     env.$on("page", page => {
       self.res.page = page;
-      console.log("page");
       self.getUserList();
     });
     env.$on("userSearch", data => {
@@ -150,7 +147,6 @@ export default {
     env.$off("page");
     env.$off("userSearch");
     env.$off("submitUser");
-    console.log("destroyed");
   },
   methods: {
     getUserList() {

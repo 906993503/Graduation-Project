@@ -15,6 +15,9 @@
           <div>{{showdate(item.created_at)}}</div>
         </sui-comment-metadata>
         <sui-comment-text>{{item.content}}</sui-comment-text>
+        <sui-comment-actions>
+          <sui-comment-action>回复</sui-comment-action>
+        </sui-comment-actions>
       </sui-comment-content>
     </sui-comment>
 
@@ -129,13 +132,11 @@ export default {
           be_user_id: self.text.user_id,
           content: self.txt
         }
-      })
-        .then(function(res) {
-          var data = res.data;
-          console.log(data.text);
-          self.txt = "";
-          self.$parent.getArticle();
-        });
+      }).then(function(res) {
+        var data = res.data;
+        self.txt = "";
+        self.$parent.getArticle();
+      });
     },
     postComment(cid) {
       var self = this;

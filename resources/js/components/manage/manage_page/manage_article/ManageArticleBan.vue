@@ -56,7 +56,6 @@ export default {
   },
   destroyed() {
     env.$off("delArticle");
-    console.log("destroyed");
   }
 };
 </script>

@@ -32,7 +32,6 @@ export default {
   },
   methods: {
     goThisItem: function(item) {
-      console.log("233");
       env.$emit("msg_show", item);
     },
     isRead: function(item) {

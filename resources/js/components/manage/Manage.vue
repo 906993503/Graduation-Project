@@ -70,7 +70,6 @@ export default {
   },
   destroyed() {
     env.$off("menu_switch");
-    console.log("destroyed");
   }
 };
 </script>

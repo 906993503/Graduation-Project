@@ -14,7 +14,9 @@
     <link rel="shortcut icon" href="/images/favicon.ico">
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+
     <link rel="stylesheet" type="text/css" href="/css/app.css">
+
 </head>
 
 <body class="base-body">
