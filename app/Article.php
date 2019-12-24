@@ -35,20 +35,29 @@ class Article extends Model
 
     public function saveArticle($id, $param)
     {
-        if ($id == 0) {
-            $article                        = new Article();
-        } else {
-            $article                        = $this->find($id);
-            if ($article == null || (isset($param['user_id']) && $article->user_id != $param['user_id'])) {
-                return ['status' => false];
+        try {
+            DB::beginTransaction();
+            if ($id == 0) {
+                $article                        = new Article();
+            } else {
+                $article                        = $this->find($id);
+                if ($article == null || (isset($param['user_id']) && $article->user_id != $param['user_id'])) {
+                    return ['status' => false];
+                }
             }
-        }
 
-        foreach ($param as $k => $v) {
-            $article->$k                    = $v;
+            foreach ($param as $k => $v) {
+                $article->$k                    = $v;
+            }
+            $article->save();
+            Message::newBanArticleMsg($article->id);
+            DB::commit();
+            return ['status' => true];
+        } catch (Exception $e) {
+            DB::rollBack();
+            report($e);
+            return false;
         }
-        $article->save();
-        return ['status' => true];
     }
 
     public function getArticleList($param)

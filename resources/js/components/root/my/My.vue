@@ -11,12 +11,12 @@
             @click="select(item.opt)"
           >
             {{item.name}}
-            <span v-if="item.opt == 'message'" class="descriptio">2</span>
+            <span v-if="item.opt == 'message'" class="descriptio">{{msgRows}}</span>
           </a>
         </sui-menu>
       </sui-grid-column>
       <sui-grid-column stretched :width="13">
-        <router-view :user="user"></router-view>
+        <router-view :user="user" :msg-rows="msgRows"></router-view>
       </sui-grid-column>
     </sui-grid>
   </div>
@@ -27,7 +27,8 @@ import Global from "../../../Global";
 export default {
   props: {
     user: Array,
-    type: Array
+    type: Array,
+    msgRows: Number
   },
   data() {
     return {

@@ -10,6 +10,7 @@ use App\Article;
 use App\Collect;
 use App\Comment;
 use App\User;
+use App\Message;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -94,7 +95,7 @@ class HomeController extends Controller
 
             $param['show_text']             = strip_tags($param['content']);
 
-            $param['show_text']             = "&nbsp;&nbsp;&nbsp;&nbsp;" . mb_substr($param['show_text'], 0, 196, "utf-8") . "...";
+            $param['show_text']             = "&nbsp;&nbsp;&nbsp;&nbsp;" . mb_substr($param['show_text'], 0, 90, "utf-8") . " . . .";
 
             $article                        = new Article();
             $res                            = $article->saveArticle($id, $param);
@@ -262,6 +263,47 @@ class HomeController extends Controller
             }
         } catch (Exception $e) {
             report($e);
+        }
+    }
+    /**
+     * 
+     */
+    public function getMessageItemList(Request $request)
+    {
+        try {
+            $page                           = $request->input('page');
+            $limit                          = $request->input('limit');
+
+            $user                           = Auth::user() ?: Auth::guard('admin')->user();
+            $param                          = [
+                'user_id'                   => $user->id
+            ];
+
+            $message                        = new Message();
+            $res                            = $message->getUserMsgList($param, $page, $limit);
+
+            return response()->json($res);
+        } catch (Exception $e) {
+            report($e);
+            return false;
+        }
+    }
+
+    /**
+     * 
+     */
+    public function readMsg(Request $request)
+    {
+        try {
+            $id                             = $request->input('id');
+
+            $message                        = new Message();
+            $res                            = $message->readMsg($id);
+
+            return response()->json($res);
+        } catch (Exception $e) {
+            report($e);
+            return false;
         }
     }
 }

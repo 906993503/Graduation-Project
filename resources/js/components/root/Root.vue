@@ -1,8 +1,8 @@
 <template>
   <div class="main-div">
-    <head-menu :user="user" class="base-div" style="background-color: white;"></head-menu>
+    <head-menu :user="user" :msgRows="msgRows" class="base-div" style="background-color: white;"></head-menu>
     <div v-if="type!=null" class="ui container base-div" style="padding: 2rem;margin-top: 1rem;">
-      <router-view :user="user" :type="type"></router-view>
+      <router-view :user="user" :type="type" :msg-rows="msgRows"></router-view>
     </div>
   </div>
 </template>
@@ -13,7 +13,8 @@ import HeadMenu from "./HeadMenu";
 export default {
   props: {
     user: Array,
-    type: Array
+    type: Array,
+    msgRows: Number
   },
   data: function() {
     return {};

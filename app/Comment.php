@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
+
 
 class Comment extends Model
 {
@@ -23,14 +25,24 @@ class Comment extends Model
 
     public function addComment($param)
     {
-        $comment                        = new Comment();
-        foreach ($param as $k => $v) {
-            $comment->$k                = $v;
+
+        try {
+            DB::beginTransaction();
+            $comment                        = new Comment();
+            foreach ($param as $k => $v) {
+                $comment->$k                = $v;
+            }
+
+            $res                            = $comment->save();
+            
+            Message::newCommentMsg($comment->id);
+            DB::commit();
+            return $res;
+        } catch (Exception $e) {
+            DB::rollBack();
+            report($e);
+            return false;
         }
-
-        $res                            = $comment->save();
-
-        return $res;
     }
 
     public function getCommentList($param)

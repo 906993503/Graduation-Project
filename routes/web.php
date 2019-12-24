@@ -24,6 +24,7 @@ Route::post('/open/getType', 'Open\OpenController@getType');
 Route::post('/open/getArticleItemList', 'Open\OpenController@getArticleItemList');
 Route::post('/open/getArticle', 'Open\OpenController@getArticle');
 Route::post('/open/toSearch', 'Open\OpenController@toSearch');
+Route::post('/open/getUserMsgRows', 'Open\OpenController@getUserMsgRows');
 
 Route::post('/manage/getUserList', 'Manage\ManageController@getUserList');
 Route::post('/manage/banUser', 'Manage\ManageController@banUser');
@@ -49,3 +50,5 @@ Route::post('/home/collectThis', 'Home\HomeController@collectThis');
 Route::post('/home/addComment', 'Home\HomeController@addComment');
 Route::post('/home/saveUserName', 'Home\HomeController@saveUserName');
 Route::post('/home/resetPw', 'Home\HomeController@resetPw');
+Route::post('/home/getMessageItemList', 'Home\HomeController@getMessageItemList');
+Route::post('/home/readMsg', 'Home\HomeController@readMsg');

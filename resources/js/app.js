@@ -7,9 +7,15 @@ import Tips from './components/Tips.vue';
 import env from "./env";
 
 axios.interceptors.request.use(function (config) {
+    if (config.url == "/open/getUserMsgRows") {
+        return config;
+    }
     env.$emit("load", 1);
     return config;
 }, function (error) {
+    if (error.request.url == "/open/getUserMsgRows") {
+        return false;
+    }
     env.$emit("load", -1);
     var data = [];
     data.push(error.message);
@@ -17,9 +23,16 @@ axios.interceptors.request.use(function (config) {
     return false;
 });
 axios.interceptors.response.use(function (response) {
+    if (response.config.url == "/open/getUserMsgRows") {
+        return response;
+    }
     env.$emit("load", -1);
     return response;
 }, function (error) {
+    console.log(error.response);
+    if (error.response.config.url == "/open/getUserMsgRows") {
+        return error;
+    }
     env.$emit("load", -1);
     if (error.response.config.url == "/login" || error.response.config.url == "/register") {
         return error;
@@ -48,7 +61,9 @@ const app = new Vue({
         load_flag: 0,
         load_style: {
             'margin-top': 0
-        }
+        },
+        timer: null,
+        msgRows: null
     },
     router: router,
     components: {
@@ -96,9 +111,19 @@ const app = new Vue({
         env.$on("load", n => {
             self.load_flag += n;
         });
+
+        this.getUserMsgRows();
+        env.$on("msgRows", n => {
+            if (self.msgRows - n <= 0) {
+                self.msgRows = null;
+            } else {
+                self.msgRows -= n;
+            }
+        });
     },
     mounted() {
         window.addEventListener('scroll', this.handleScroll, true);
+        this.timer = setInterval(this.getUserMsgRows, 30000);
     },
     methods: {
         handleScroll(e) {
@@ -106,6 +131,20 @@ const app = new Vue({
             this.load_style = {
                 'margin-top': scrollTop + "px"
             };
+        },
+        getUserMsgRows() {
+            var self = this;
+            axios({
+                method: "post",
+                url: "/open/getUserMsgRows"
+            }).then(function (res) {
+                var data = res.data;
+                if (data.rows != 0) {
+                    self.msgRows = data.rows;
+                } else {
+                    self.msgRows = null;
+                }
+            });
         }
     },
     computed: {
@@ -117,9 +156,13 @@ const app = new Vue({
             }
         }
     },
+    beforeDestroy() {
+        clearInterval(this.timer);
+    },
     destroyed() {
         env.$off("user");
         env.$off("type");
         env.$off("load");
+        env.$off("msgRows");
     },
 });

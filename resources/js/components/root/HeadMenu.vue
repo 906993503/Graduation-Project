@@ -33,6 +33,7 @@
             </sui-dropdown-item>
             <sui-dropdown-item @click.native="myMessage()">
               <sui-icon name="envelope" />我的消息
+              <span class="description">{{msgRows}}</span>
             </sui-dropdown-item>
             <sui-dropdown-divider />
             <sui-dropdown-item v-if="user.is_admin == 1" @click.native="manage()">
@@ -59,7 +60,8 @@ import Global from "../../Global";
 import env from "../../env";
 export default {
   props: {
-    user: Array
+    user: Array,
+    msgRows: Number
   },
   data() {
     return {

@@ -10,6 +10,7 @@ use App\User;
 use App\Types;
 use App\Article;
 use App\Comment;
+use App\Message;
 
 class ManageController extends Controller
 {

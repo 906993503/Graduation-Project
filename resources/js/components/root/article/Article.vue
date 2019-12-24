@@ -1,5 +1,5 @@
 <template>
-  <article v-html="text.content" style="min-height: 46rem;"></article>
+  <article class="ql-editor" v-html="text.content" style="min-height: 46rem;"></article>
 </template>
 
 <script>

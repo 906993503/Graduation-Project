@@ -24,7 +24,7 @@
         <sui-dimmer :active="isLoad" :style="load_style">
             <sui-loader>加载中</sui-loader>
         </sui-dimmer>
-        <router-view :user="user" :type="type"></router-view>
+        <router-view :user="user" :type="type" :msg-rows="msgRows"></router-view>
         <tips></tips>
     </div>
     <script type="text/javascript" src="/js/app.js"></script>

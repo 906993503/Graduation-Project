@@ -63,12 +63,18 @@ class Types extends Model
         try {
             DB::beginTransaction();
             $type                       = $this->find($id);
-            $articles                   = $type->articles;
-            foreach ($articles as $article) {
-                $article->type_id  = 0;
-                $article->active   = 0;
-                $article->reason   = "分类被删除，请重新选择分类";
-                $article->save();
+            $a_id                       = [];
+            foreach ($type->articles as $k => $v) {
+                $a_id[]                 = $v->id;
+            }
+            $articles                   = Article::where('type_id', '=', $id)
+                ->update([
+                    'type_id'           => 0,
+                    'active'            => 0,
+                    'reason'            => "分类被删除，请重新选择分类"
+                ]);
+            foreach ($a_id as $k => $v) {
+                Message::newBanArticleMsg($v);
             }
             $res                        = $this->destroy($id);
             DB::commit();

@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Types;
 use App\Article;
 use App\User;
+use App\Message;
 use Illuminate\Support\Facades\DB;
 
 
@@ -19,7 +20,8 @@ class OpenController extends Controller
      * @return void
      */
     public function __construct()
-    { }
+    {
+    }
 
     /**
      * 获取当前登陆用户
@@ -145,6 +147,29 @@ class OpenController extends Controller
                 'moreItems'             => $rows - $page * $limit,
                 'list'                  => $list->take($page * $limit)
             ];
+        } catch (Exception $e) {
+            report($e);
+            return false;
+        }
+    }
+    /**
+     * 获取消息数量
+     */
+    public function getUserMsgRows(Request $request)
+    {
+        try {
+            if (Auth::check() || Auth::guard('admin')->check()) {
+                $user                           = Auth::user() ?: Auth::guard('admin')->user();
+
+                $message                        = new Message();
+                $res                            = $message->getUserMsgRows($user);
+
+                return response()->json($res);
+            } else {
+                return response()->json([
+                    'rows'                      => 0
+                ]);
+            }
         } catch (Exception $e) {
             report($e);
             return false;

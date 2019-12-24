@@ -1,18 +1,14 @@
 <template>
   <div>
-
     <sui-button basic secondary icon="reply" @click="backList()">返回</sui-button>
-    <h1>{{msg_id}}</h1>
-    <article>
-      <h2>I am Example</h2>
-    </article>
+    <article class="ql-editor" v-html="msg.content"></article>
   </div>
 </template>
 <script>
 import env from "../../../../env";
 export default {
   props: {
-    msg_id: Number
+    msg: Object
   },
   methods: {
     backList() {
