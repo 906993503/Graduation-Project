@@ -4598,6 +4598,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -11437,7 +11444,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.main-div {\r\n  margin-top: 0;\n}\r\n", ""]);
+exports.push([module.i, "\n.main-div {\r\n  margin-top: 0;\n}\n.icp {\r\n  height: 5rem;\r\n  text-align: center;\r\n  margin-top: 1rem;\r\n  background-color: #1b1c1d;\r\n  color: #aaa;\r\n  padding: 1rem;\n}\n.icp a {\r\n  color: #aaa;\n}\r\n", ""]);
 
 // exports
 
@@ -63858,12 +63865,35 @@ var render = function() {
             ],
             1
           )
-        : _vm._e()
+        : _vm._e(),
+      _vm._v(" "),
+      _vm._m(0)
     ],
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "icp" }, [
+      _c("span", [_vm._v("@QAQxm毕业设计 qaqxm.com 版权所有")]),
+      _vm._v(" "),
+      _c(
+        "a",
+        { attrs: { href: "http://www.beian.miit.gov.cn", target: "_blank" } },
+        [_vm._v("闽ICP备19027143号")]
+      ),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("span", [_vm._v("联系邮箱：906993503@qq.com")]),
+      _vm._v(" "),
+      _c("span", [_vm._v("联系电话：15980165890")])
+    ])
+  }
+]
 render._withStripped = true
 
 
