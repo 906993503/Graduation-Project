@@ -3021,6 +3021,13 @@ __webpack_require__.r(__webpack_exports__);
     addComment: function addComment() {
       var self = this;
 
+      if (self.user.email_verified_at == null) {
+        self.$router.go(-1);
+        var data = [];
+        data.push("请先验证邮箱");
+        _env__WEBPACK_IMPORTED_MODULE_1__["default"].$emit("msg");
+      }
+
       if (self.txt.length < 6) {
         var data = [];
         data.push("评论至少6个字符");
@@ -4189,6 +4196,13 @@ __webpack_require__.r(__webpack_exports__);
           });
         }
       });
+    }
+
+    if (self.user.email_verified_at == null) {
+      self.$router.go(-1);
+      var data = [];
+      data.push("请先验证邮箱");
+      _env__WEBPACK_IMPORTED_MODULE_2__["default"].$emit("msg");
     }
   },
   mounted: function mounted() {},

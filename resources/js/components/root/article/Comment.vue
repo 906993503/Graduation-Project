@@ -142,6 +142,12 @@ export default {
     },
     addComment() {
       var self = this;
+      if (self.user.email_verified_at == null) {
+        self.$router.go(-1);
+        var data = [];
+        data.push("请先验证邮箱");
+        env.$emit("msg");
+      }
       if (self.txt.length < 6) {
         var data = [];
         data.push("评论至少6个字符");

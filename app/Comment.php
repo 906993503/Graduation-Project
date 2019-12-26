@@ -34,8 +34,9 @@ class Comment extends Model
             }
 
             $res                            = $comment->save();
-            
-            Message::newCommentMsg($comment->id);
+            if ($comment->user_id != $comment->be_user_id) {
+                Message::newCommentMsg($comment->id);
+            }
             DB::commit();
             return $res;
         } catch (Exception $e) {

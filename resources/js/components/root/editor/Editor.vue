@@ -144,13 +144,12 @@ export default {
         url: "/home/saveArticle",
         method: "post",
         data: data
-      })
-        .then(function(res) {
-          var data = res.data;
-          self.$router.push({
-            name: "MyArticle"
-          });
+      }).then(function(res) {
+        var data = res.data;
+        self.$router.push({
+          name: "MyArticle"
         });
+      });
     }
   },
   computed: {
@@ -204,23 +203,28 @@ export default {
         data: {
           id: self.id
         }
-      })
-        .then(function(res) {
-          var data = res.data;
-          if (data.status) {
-            self.content = data.article.content;
-            self.type_id = data.article.type_id;
-            self.title = data.article.title;
-            self.faceimg = data.article.face_img;
-            self.label = data.article.label;
-            self.reason = data.article.reason;
-            self.active = data.article.active;
-          } else {
-            self.$router.push({
-              name: "Home"
-            });
-          }
-        });
+      }).then(function(res) {
+        var data = res.data;
+        if (data.status) {
+          self.content = data.article.content;
+          self.type_id = data.article.type_id;
+          self.title = data.article.title;
+          self.faceimg = data.article.face_img;
+          self.label = data.article.label;
+          self.reason = data.article.reason;
+          self.active = data.article.active;
+        } else {
+          self.$router.push({
+            name: "Home"
+          });
+        }
+      });
+    }
+    if (self.user.email_verified_at == null) {
+      self.$router.go(-1);
+      var data = [];
+      data.push("请先验证邮箱");
+      env.$emit("msg");
     }
   },
   mounted() {},
