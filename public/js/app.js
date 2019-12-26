@@ -60361,150 +60361,131 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("h1", [_vm._v("文章编辑")]),
-      _vm._v(" "),
-      _vm.active == 0
-        ? _c("div", { staticClass: "ban-reason" }, [
-            _vm._v("\n    文章被驳回！请修改后重新发布\n    "),
-            _c("br"),
-            _vm._v("\n    原因：" + _vm._s(_vm.reason) + "\n  ")
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _c(
-        "sui-grid",
+  return _vm.user != null
+    ? _c(
+        "div",
         [
+          _c("h1", [_vm._v("文章编辑")]),
+          _vm._v(" "),
+          _vm.active == 0
+            ? _c("div", { staticClass: "ban-reason" }, [
+                _vm._v("\n    文章被驳回！请修改后重新发布\n    "),
+                _c("br"),
+                _vm._v("\n    原因：" + _vm._s(_vm.reason) + "\n  ")
+              ])
+            : _vm._e(),
+          _vm._v(" "),
           _c(
-            "sui-grid-row",
+            "sui-grid",
             [
               _c(
-                "sui-grid-column",
-                { attrs: { width: 12 } },
+                "sui-grid-row",
                 [
                   _c(
-                    "sui-form",
-                    { staticStyle: { position: "absolute", bottom: "0" } },
+                    "sui-grid-column",
+                    { attrs: { width: 12 } },
                     [
                       _c(
-                        "sui-form-fields",
-                        { attrs: { inline: "" } },
+                        "sui-form",
+                        { staticStyle: { position: "absolute", bottom: "0" } },
                         [
-                          _c("sui-form-field", [
-                            _c("label", [_vm._v("标题：")]),
-                            _vm._v(" "),
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.title,
-                                  expression: "title"
-                                }
-                              ],
-                              attrs: { placeholder: "Title" },
-                              domProps: { value: _vm.title },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.title = $event.target.value
-                                }
-                              }
-                            })
-                          ]),
-                          _vm._v(" "),
-                          _c("sui-form-field", [
-                            _c("label", [_vm._v("所属分类：")]),
-                            _vm._v(" "),
-                            _c(
-                              "select",
-                              {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.type_id,
-                                    expression: "type_id"
-                                  }
-                                ],
-                                on: {
-                                  change: function($event) {
-                                    var $$selectedVal = Array.prototype.filter
-                                      .call($event.target.options, function(o) {
-                                        return o.selected
-                                      })
-                                      .map(function(o) {
-                                        var val =
-                                          "_value" in o ? o._value : o.value
-                                        return val
-                                      })
-                                    _vm.type_id = $event.target.multiple
-                                      ? $$selectedVal
-                                      : $$selectedVal[0]
-                                  }
-                                }
-                              },
-                              [
-                                _c("option", { attrs: { value: "" } }, [
-                                  _vm._v("尚未选择")
-                                ]),
-                                _vm._v(" "),
-                                _vm._l(_vm.type, function(item) {
-                                  return _c(
-                                    "option",
-                                    {
-                                      key: item.id,
-                                      domProps: { value: item.id }
-                                    },
-                                    [_vm._v(_vm._s(item.name))]
-                                  )
-                                })
-                              ],
-                              2
-                            )
-                          ]),
-                          _vm._v(" "),
                           _c(
-                            "sui-button",
-                            {
-                              attrs: { basic: "" },
-                              on: {
-                                click: function($event) {
-                                  return _vm.openUpload()
-                                }
-                              }
-                            },
-                            [_vm._v("上传封面")]
+                            "sui-form-fields",
+                            { attrs: { inline: "" } },
+                            [
+                              _c("sui-form-field", [
+                                _c("label", [_vm._v("标题：")]),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.title,
+                                      expression: "title"
+                                    }
+                                  ],
+                                  attrs: { placeholder: "Title" },
+                                  domProps: { value: _vm.title },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.title = $event.target.value
+                                    }
+                                  }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c("sui-form-field", [
+                                _c("label", [_vm._v("所属分类：")]),
+                                _vm._v(" "),
+                                _c(
+                                  "select",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.type_id,
+                                        expression: "type_id"
+                                      }
+                                    ],
+                                    on: {
+                                      change: function($event) {
+                                        var $$selectedVal = Array.prototype.filter
+                                          .call($event.target.options, function(
+                                            o
+                                          ) {
+                                            return o.selected
+                                          })
+                                          .map(function(o) {
+                                            var val =
+                                              "_value" in o ? o._value : o.value
+                                            return val
+                                          })
+                                        _vm.type_id = $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("option", { attrs: { value: "" } }, [
+                                      _vm._v("尚未选择")
+                                    ]),
+                                    _vm._v(" "),
+                                    _vm._l(_vm.type, function(item) {
+                                      return _c(
+                                        "option",
+                                        {
+                                          key: item.id,
+                                          domProps: { value: item.id }
+                                        },
+                                        [_vm._v(_vm._s(item.name))]
+                                      )
+                                    })
+                                  ],
+                                  2
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "sui-button",
+                                {
+                                  attrs: { basic: "" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.openUpload()
+                                    }
+                                  }
+                                },
+                                [_vm._v("上传封面")]
+                              )
+                            ],
+                            1
                           )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "sui-grid-column",
-                { attrs: { width: 4 } },
-                [
-                  _c(
-                    "sui-form",
-                    { staticStyle: { position: "absolute", bottom: "0" } },
-                    [
-                      _c(
-                        "sui-form-fields",
-                        { attrs: { inline: "" } },
-                        [
-                          _c("sui-form-field", [
-                            _c("label", [_vm._v("文章封面：")])
-                          ])
                         ],
                         1
                       )
@@ -60512,86 +60493,113 @@ var render = function() {
                     1
                   ),
                   _vm._v(" "),
-                  _c("div", { staticClass: "face-div", style: _vm.facediv }, [
-                    _c("img", {
-                      style: _vm.haveImg,
-                      attrs: { src: _vm.faceimg }
-                    }),
-                    _vm._v(" "),
-                    _c("input", {
-                      ref: "fileInput",
-                      staticStyle: { display: "none" },
-                      attrs: { accept: "image/*", type: "file" },
-                      on: {
-                        change: function($event) {
-                          return _vm.tirggerFile($event)
-                        }
-                      }
-                    })
-                  ])
+                  _c(
+                    "sui-grid-column",
+                    { attrs: { width: 4 } },
+                    [
+                      _c(
+                        "sui-form",
+                        { staticStyle: { position: "absolute", bottom: "0" } },
+                        [
+                          _c(
+                            "sui-form-fields",
+                            { attrs: { inline: "" } },
+                            [
+                              _c("sui-form-field", [
+                                _c("label", [_vm._v("文章封面：")])
+                              ])
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "face-div", style: _vm.facediv },
+                        [
+                          _c("img", {
+                            style: _vm.haveImg,
+                            attrs: { src: _vm.faceimg }
+                          }),
+                          _vm._v(" "),
+                          _c("input", {
+                            ref: "fileInput",
+                            staticStyle: { display: "none" },
+                            attrs: { accept: "image/*", type: "file" },
+                            on: {
+                              change: function($event) {
+                                return _vm.tirggerFile($event)
+                              }
+                            }
+                          })
+                        ]
+                      )
+                    ],
+                    1
+                  )
                 ],
                 1
               )
             ],
             1
-          )
+          ),
+          _vm._v(" "),
+          _c("quill-editor", {
+            ref: "myQuillEditor",
+            attrs: { options: _vm.editorOption },
+            model: {
+              value: _vm.content,
+              callback: function($$v) {
+                _vm.content = $$v
+              },
+              expression: "content"
+            }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "bottom-div" }, [
+            _c(
+              "div",
+              { staticClass: "label-div" },
+              [_c("label-item", { attrs: { label: _vm.label } })],
+              1
+            ),
+            _vm._v(" "),
+            _c("div", { staticStyle: { clear: "both" } })
+          ]),
+          _vm._v(" "),
+          _c(
+            "sui-button",
+            {
+              attrs: { basic: "", floated: "right" },
+              nativeOn: {
+                click: function($event) {
+                  return _vm.goBack()
+                }
+              }
+            },
+            [_vm._v("返回")]
+          ),
+          _vm._v(" "),
+          _c(
+            "sui-button",
+            {
+              attrs: { color: "red", floated: "right" },
+              nativeOn: {
+                click: function($event) {
+                  return _vm.saveArticle()
+                }
+              }
+            },
+            [_vm._v("发布")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticStyle: { clear: "both" } })
         ],
         1
-      ),
-      _vm._v(" "),
-      _c("quill-editor", {
-        ref: "myQuillEditor",
-        attrs: { options: _vm.editorOption },
-        model: {
-          value: _vm.content,
-          callback: function($$v) {
-            _vm.content = $$v
-          },
-          expression: "content"
-        }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "bottom-div" }, [
-        _c(
-          "div",
-          { staticClass: "label-div" },
-          [_c("label-item", { attrs: { label: _vm.label } })],
-          1
-        ),
-        _vm._v(" "),
-        _c("div", { staticStyle: { clear: "both" } })
-      ]),
-      _vm._v(" "),
-      _c(
-        "sui-button",
-        {
-          attrs: { basic: "", floated: "right" },
-          nativeOn: {
-            click: function($event) {
-              return _vm.goBack()
-            }
-          }
-        },
-        [_vm._v("返回")]
-      ),
-      _vm._v(" "),
-      _c(
-        "sui-button",
-        {
-          attrs: { color: "red", floated: "right" },
-          nativeOn: {
-            click: function($event) {
-              return _vm.saveArticle()
-            }
-          }
-        },
-        [_vm._v("发布")]
-      ),
-      _vm._v(" "),
-      _c("div", { staticStyle: { clear: "both" } })
-    ],
-    1
-  )
+      )
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="user != null">
     <h1>文章编辑</h1>
     <div class="ban-reason" v-if="active == 0">
       文章被驳回！请修改后重新发布
