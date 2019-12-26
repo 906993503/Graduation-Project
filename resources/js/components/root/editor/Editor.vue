@@ -220,8 +220,8 @@ export default {
         }
       });
     }
-    if (self.user.email_verified_at == null) {
-      self.$router.go(-1);
+    if (this.user.email_verified_at == null) {
+      this.$router.go(-1);
       var data = [];
       data.push("请先验证邮箱");
       env.$emit("msg", data);

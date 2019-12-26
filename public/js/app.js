@@ -3023,8 +3023,8 @@ __webpack_require__.r(__webpack_exports__);
     addComment: function addComment() {
       var self = this;
 
-      if (self.user.email_verified_at == null) {
-        self.$router.go(-1);
+      if (this.user.email_verified_at == null) {
+        this.$router.go(-1);
         var data = [];
         data.push("请先验证邮箱");
         _env__WEBPACK_IMPORTED_MODULE_1__["default"].$emit("msg", data);
@@ -4200,8 +4200,8 @@ __webpack_require__.r(__webpack_exports__);
       });
     }
 
-    if (self.user.email_verified_at == null) {
-      self.$router.go(-1);
+    if (this.user.email_verified_at == null) {
+      this.$router.go(-1);
       var data = [];
       data.push("请先验证邮箱");
       _env__WEBPACK_IMPORTED_MODULE_2__["default"].$emit("msg", data);
