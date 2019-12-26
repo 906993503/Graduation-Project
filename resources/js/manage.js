@@ -3,7 +3,6 @@ require('./bootstrap');
 window.Vue = require('vue');
 import VueRouter from 'vue-router';
 import SuiVue from 'semantic-ui-vue';
-import Global from './Global.vue';
 import '../css/Mycss.css';
 import 'semantic-ui-css/semantic.min.css';
 import Tips from './components/Tips.vue';
@@ -37,7 +36,7 @@ Vue.use(SuiVue);
 
 import {
     manage
-} from './route';
+} from './route_manage';
 
 const router = new VueRouter({
     routes: manage

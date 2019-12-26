@@ -1,15 +1,9 @@
-import Global from './Global.vue';
 import Root from './components/root/Root.vue';
 import Login from './components/auth/Login.vue';
 import Register from './components/auth/Register.vue';
-import Manage from './components/manage/Manage.vue';
 import Home from './components/root/home/Home.vue';
 import HomeContent from './components/root/home/HomeContent.vue';
 import Content from './components/root/article/Content.vue';
-import ManageArticle from './components/manage/manage_page/manage_article/ManageArticle.vue';
-import ManageComment from './components/manage/manage_page/manage_comment/ManageComment.vue';
-import ManageType from './components/manage/manage_page/manage_type/ManageType.vue';
-import ManageUser from './components/manage/manage_page/manage_user/ManageUser.vue';
 import My from './components/root/my/My.vue';
 import MyHome from './components/root/my/MyHome.vue';
 import MyArticle from './components/root/my/MyArticle.vue';
@@ -88,29 +82,6 @@ var home = [{
     name: "Reset",
     component: Reset
 }];
-var manage = [{
-    path: '/manage',
-    name: "Manage",
-    component: Manage,
-    children: [{
-        path: '/manage/article',
-        name: "ManageArticle",
-        component: ManageArticle
-    }, {
-        path: '/manage/type',
-        name: "ManageType",
-        component: ManageType
-    }, {
-        path: '/manage/comment',
-        name: "ManageComment",
-        component: ManageComment
-    }, {
-        path: '/manage/user',
-        name: "ManageUser",
-        component: ManageUser
-    }]
-}];
 export {
-    home,
-    manage
+    home
 }

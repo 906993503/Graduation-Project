@@ -50,7 +50,9 @@ class Article extends Model
                 $article->$k                    = $v;
             }
             $article->save();
-            Message::newBanArticleMsg($article->id);
+            if (!$article->active) {
+                Message::newBanArticleMsg($article->id);
+            }
             DB::commit();
             return ['status' => true];
         } catch (Exception $e) {
