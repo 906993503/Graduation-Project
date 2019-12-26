@@ -2868,6 +2868,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     text: Object
@@ -59755,11 +59757,13 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("article", {
-    staticClass: "ql-editor",
-    staticStyle: { "min-height": "46rem" },
-    domProps: { innerHTML: _vm._s(_vm.text.content) }
-  })
+  return _c("div", { staticClass: "ql-snow" }, [
+    _c("article", {
+      staticClass: "ql-editor",
+      staticStyle: { "min-height": "46rem" },
+      domProps: { innerHTML: _vm._s(_vm.text.content) }
+    })
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

@@ -1,5 +1,7 @@
 <template>
-  <article class="ql-editor" v-html="text.content" style="min-height: 46rem;"></article>
+  <div class="ql-snow">
+    <article class="ql-editor" v-html="text.content" style="min-height: 46rem;"></article>
+  </div>
 </template>
 
 <script>
