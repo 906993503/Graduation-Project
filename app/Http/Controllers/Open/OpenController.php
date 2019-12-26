@@ -49,7 +49,7 @@ class OpenController extends Controller
     public function getType()
     {
         try {
-            $types = Types::orderBy('sort_by', 'asc')->all();
+            $types = Types::orderBy('sort_by', 'asc')->get();
             return response()->json(['type' => $types]);
         } catch (Exception $e) {
             report($e);
