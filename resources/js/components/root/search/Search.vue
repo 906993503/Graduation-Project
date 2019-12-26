@@ -3,11 +3,11 @@
     <sui-form>
       <sui-form-field inline>
         <input placeholder="First Name" />
-        <sui-button color="blue" icon="search" labelPosition="left" @click="toNewSearch()">搜索</sui-button>
+        <sui-button type="button" color="blue" icon="search" labelPosition="left" @click="toNewSearch()">搜索</sui-button>
       </sui-form-field>
     </sui-form>
     <article-item :items="items" style="min-height: 51rem;margin-top: 2rem;"></article-item>
-    <sui-button v-if="moreItems>0" fluid content="加载更多" @click="getArticleItemList()" />
+    <sui-button type="button" v-if="moreItems>0" fluid content="加载更多" @click="getArticleItemList()" />
   </div>
 </template>
 <script>

@@ -13,7 +13,7 @@
             <input type="number" v-model="sort_by" />
           </sui-form-field>
           <div class="submit-div">
-            <sui-button color="blue" @click="submit()">提交</sui-button>
+            <sui-button type="button"  color="blue" @click="submit()">提交</sui-button>
           </div>
         </sui-form>
       </sui-modal-content>

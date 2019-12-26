@@ -6,7 +6,7 @@
           <label>搜索：</label>
           <input type="text" v-model="search" placeholder="Search..." />
         </sui-form-field>
-        <sui-button color="blue" @click="toSearch()">搜索</sui-button>
+        <sui-button type="button"  color="blue" @click="toSearch()">搜索</sui-button>
       </sui-form-fields>
     </sui-form>
   </div>

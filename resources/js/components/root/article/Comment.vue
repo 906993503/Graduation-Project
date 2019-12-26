@@ -38,6 +38,7 @@
     <div class="comment" v-if="user != null" id="c0">
       <quill-editor v-model="txt" ref="myQuillEditor" :options="editorOption"></quill-editor>
       <sui-button
+        type="button"
         content="添加评论"
         label-position="left"
         icon="edit"
@@ -142,7 +143,7 @@ export default {
     },
     addComment() {
       var self = this;
-      if (this.user.email_verified_at == null) {
+      if (this.user != null && this.user.email_verified_at == null) {
         this.$router.go(-1);
         var data = [];
         data.push("请先验证邮箱");

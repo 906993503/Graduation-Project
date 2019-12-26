@@ -14,6 +14,7 @@
       </div>
     </div>
     <sui-button
+     type="button"
       class="collect-but"
       style="position: absolute;top: -3rem;"
       v-if="isOwner()"
@@ -24,6 +25,7 @@
       @click="goEdit()"
     />
     <sui-button
+     type="button"
       class="collect-but"
       style="position: absolute;"
       v-if="user!=null"

@@ -43823,7 +43823,7 @@ var render = function() {
             _c(
               "sui-button",
               {
-                attrs: { color: "olive" },
+                attrs: { type: "button", color: "olive" },
                 on: {
                   click: function($event) {
                     return _vm.addLabel()
@@ -43898,7 +43898,7 @@ var render = function() {
               _c(
                 "sui-button",
                 {
-                  attrs: { positive: "" },
+                  attrs: { type: "button", positive: "" },
                   nativeOn: {
                     click: function($event) {
                       return _vm.toggle($event)
@@ -44420,7 +44420,7 @@ var render = function() {
                   _c(
                     "sui-button",
                     {
-                      attrs: { color: "blue" },
+                      attrs: { type: "button", color: "blue" },
                       on: {
                         click: function($event) {
                           return _vm.submit()
@@ -44575,7 +44575,7 @@ var render = function() {
                   _c(
                     "sui-button",
                     {
-                      attrs: { color: "blue" },
+                      attrs: { type: "button", color: "blue" },
                       on: {
                         click: function($event) {
                           return _vm.submit()
@@ -44793,7 +44793,7 @@ var render = function() {
               _c(
                 "sui-button",
                 {
-                  attrs: { color: "blue" },
+                  attrs: { type: "button", color: "blue" },
                   on: {
                     click: function($event) {
                       return _vm.toSearch()
@@ -44973,7 +44973,7 @@ var render = function() {
               _c(
                 "sui-button",
                 {
-                  attrs: { color: "blue" },
+                  attrs: { type: "button", color: "blue" },
                   on: {
                     click: function($event) {
                       return _vm.toSearch()
@@ -45169,7 +45169,7 @@ var render = function() {
                       _c(
                         "sui-button",
                         {
-                          attrs: { color: "blue" },
+                          attrs: { type: "button", color: "blue" },
                           on: {
                             click: function($event) {
                               return _vm.submit()
@@ -45255,7 +45255,7 @@ var render = function() {
               _c(
                 "sui-button",
                 {
-                  attrs: { color: "blue" },
+                  attrs: { type: "button", color: "blue" },
                   on: {
                     click: function($event) {
                       return _vm.toSearch()
@@ -45268,7 +45268,7 @@ var render = function() {
               _c(
                 "sui-button",
                 {
-                  attrs: { color: "red" },
+                  attrs: { type: "button", color: "red" },
                   on: {
                     click: function($event) {
                       return _vm.newType()
@@ -45452,7 +45452,7 @@ var render = function() {
                       _c(
                         "sui-button",
                         {
-                          attrs: { color: "blue" },
+                          attrs: { type: "button", color: "blue" },
                           on: {
                             click: function($event) {
                               return _vm.submit()
@@ -45666,7 +45666,7 @@ var render = function() {
               _c(
                 "sui-button",
                 {
-                  attrs: { color: "blue" },
+                  attrs: { type: "button", color: "blue" },
                   on: {
                     click: function($event) {
                       return _vm.toSearch()

@@ -28,7 +28,7 @@
           <label>-</label>
           <input type="date" v-model="end_date" />
         </sui-form-field>
-        <sui-button color="blue" @click="toSearch()">搜索</sui-button>
+        <sui-button type="button"  color="blue" @click="toSearch()">搜索</sui-button>
       </sui-form-fields>
     </sui-form>
   </div>

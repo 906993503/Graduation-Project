@@ -1,5 +1,5 @@
 <template>
-  <div v-if="user != null">
+  <div>
     <h1>文章编辑</h1>
     <div class="ban-reason" v-if="active == 0">
       文章被驳回！请修改后重新发布
@@ -22,7 +22,7 @@
                   <option v-for="item in type" :key="item.id" :value="item.id">{{item.name}}</option>
                 </select>
               </sui-form-field>
-              <sui-button basic @click="openUpload()">上传封面</sui-button>
+              <sui-button basic type="button" @click.native="openUpload()">上传封面</sui-button>
             </sui-form-fields>
           </sui-form>
         </sui-grid-column>
@@ -36,15 +36,13 @@
           </sui-form>
           <div class="face-div" :style="facediv">
             <img :src="faceimg" :style="haveImg" />
-            <form>
-              <input
-                style="display:none;"
-                ref="fileInput"
-                accept="image/*"
-                type="file"
-                @change="tirggerFile($event)"
-              />
-            </form>
+            <input
+              style="display:none;"
+              ref="fileInput"
+              accept="image/*"
+              type="file"
+              @change="tirggerFile($event)"
+            />
           </div>
         </sui-grid-column>
       </sui-grid-row>
@@ -58,8 +56,8 @@
       <div style="clear:both;"></div>
     </div>
 
-    <sui-button basic floated="right" @click.native="goBack()">返回</sui-button>
-    <sui-button color="red" floated="right" @click.native="saveArticle()">发布</sui-button>
+    <sui-button type="button" basic floated="right" @click.native="goBack()">返回</sui-button>
+    <sui-button type="button" color="red" floated="right" @click.native="saveArticle()">发布</sui-button>
     <div style="clear:both;"></div>
   </div>
 </template>
@@ -222,7 +220,7 @@ export default {
         }
       });
     }
-    if (this.user.email_verified_at == null) {
+    if (this.user != null && this.user.email_verified_at == null) {
       this.$router.go(-1);
       var data = [];
       data.push("请先验证邮箱");

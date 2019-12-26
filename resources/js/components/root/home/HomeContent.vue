@@ -1,7 +1,7 @@
 <template>
   <div style="min-height: 56rem;">
     <article-item :items="items"></article-item>
-    <sui-button v-if="moreItems>0" fluid content="加载更多" @click="getArticleItemList()" />
+    <sui-button type="button" v-if="moreItems>0" fluid content="加载更多" @click="getArticleItemList()" />
   </div>
 </template>
 

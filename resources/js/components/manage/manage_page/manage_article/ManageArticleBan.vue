@@ -10,7 +10,7 @@
           </sui-form-field>
         </sui-form>
         <div class="submit-div">
-          <sui-button color="blue" @click="submit()">驳回</sui-button>
+          <sui-button type="button"  color="blue" @click="submit()">驳回</sui-button>
         </div>
       </sui-modal-content>
     </sui-modal>

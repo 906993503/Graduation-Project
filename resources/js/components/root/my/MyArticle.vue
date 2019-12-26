@@ -1,6 +1,7 @@
 <template>
   <div class="user-body">
     <sui-button
+      type="button"
       compact
       icon="plus"
       label-position="left"
@@ -13,7 +14,13 @@
       <sui-menu-item :active="true">我的文章</sui-menu-item>
     </sui-menu>
     <article-item :items="items" style="min-height: 50rem;"></article-item>
-    <sui-button v-if="moreItems>0" fluid content="加载更多" @click="getArticleItemList()" />
+    <sui-button
+      type="button"
+      v-if="moreItems>0"
+      fluid
+      content="加载更多"
+      @click="getArticleItemList()"
+    />
   </div>
 </template>
 <script>
@@ -51,13 +58,12 @@ export default {
           page: self.page,
           limit: self.limit
         }
-      })
-        .then(function(res) {
-          var data = res.data;
-          self.items = data.list;
-          self.moreItems = data.moreItems;
-          self.page++;
-        });
+      }).then(function(res) {
+        var data = res.data;
+        self.items = data.list;
+        self.moreItems = data.moreItems;
+        self.page++;
+      });
     }
   },
   created() {

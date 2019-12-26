@@ -45,10 +45,10 @@
           </sui-dropdown-menu>
         </sui-dropdown>
         <sui-menu-item v-if="user === null" style="margin-right:0;padding-right:0;">
-          <sui-button basic @click.native="login()">登录</sui-button>
+          <sui-button type="button" basic @click.native="login()">登录</sui-button>
         </sui-menu-item>
         <sui-menu-item v-if="user === null">
-          <sui-button color="red" @click.native="register()">注册</sui-button>
+          <sui-button type="button" color="red" @click.native="register()">注册</sui-button>
         </sui-menu-item>
       </sui-menu-menu>
     </div>

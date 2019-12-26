@@ -1,6 +1,6 @@
 <template>
   <div>
-    <sui-button basic secondary icon="reply" @click="backList()">返回</sui-button>
+    <sui-button type="button" basic secondary icon="reply" @click="backList()">返回</sui-button>
     <article class="ql-editor" v-html="msg.content"></article>
   </div>
 </template>

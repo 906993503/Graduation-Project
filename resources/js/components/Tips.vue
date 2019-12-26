@@ -8,7 +8,7 @@
         </sui-modal-description>
       </sui-modal-content>
       <sui-modal-actions>
-        <sui-button positive @click.native="toggle">OK</sui-button>
+        <sui-button type="button" positive @click.native="toggle">OK</sui-button>
       </sui-modal-actions>
     </sui-modal>
   </div>

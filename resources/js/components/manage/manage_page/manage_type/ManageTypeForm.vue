@@ -6,8 +6,8 @@
           <label>搜索：</label>
           <input type="text" v-model="search" placeholder="分类名" />
         </sui-form-field>
-        <sui-button color="blue" @click="toSearch()">搜索</sui-button>
-        <sui-button color="red" @click="newType()">新增分类</sui-button>
+        <sui-button type="button"  color="blue" @click="toSearch()">搜索</sui-button>
+        <sui-button type="button"  color="red" @click="newType()">新增分类</sui-button>
       </sui-form-fields>
     </sui-form>
   </div>

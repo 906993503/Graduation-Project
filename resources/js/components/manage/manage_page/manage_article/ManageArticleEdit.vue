@@ -20,7 +20,7 @@
           <div style="clear:both;"></div>
         </div>
         <div class="submit-div">
-          <sui-button color="blue" @click="submit()">提交</sui-button>
+          <sui-button type="button"  color="blue" @click="submit()">提交</sui-button>
         </div>
       </sui-modal-content>
     </sui-modal>

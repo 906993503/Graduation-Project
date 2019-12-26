@@ -94,6 +94,7 @@ const app = new Vue({
                             self.$set(self.user, i, data.user[i]);
                         }
                     }
+                    console.log(self.user);
                 });
         }
         env.$on("type", type => {

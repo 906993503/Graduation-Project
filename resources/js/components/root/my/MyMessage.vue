@@ -1,6 +1,7 @@
 <template>
   <div class="user-body">
     <sui-button
+      type="button"
       v-if="msg_show == null"
       compact
       content="全部标为已读"

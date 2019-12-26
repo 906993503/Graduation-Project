@@ -63,7 +63,7 @@
       <sui-menu-item :active="true">我的收藏夹</sui-menu-item>
     </sui-menu>
     <article-item :items="items" style="min-height: 39rem;"></article-item>
-    <sui-button v-if="moreItems>0" fluid content="加载更多" @click="getArticleItemList()" />
+    <sui-button type="button" v-if="moreItems>0" fluid content="加载更多" @click="getArticleItemList()" />
   </div>
 </template>
 

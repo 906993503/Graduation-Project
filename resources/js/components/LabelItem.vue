@@ -12,7 +12,7 @@
           <label>新增标签：</label>
           <input placeholder="Label" v-model="l" />
         </sui-form-field>
-        <sui-button color="olive" @click="addLabel()">添加标签</sui-button>
+        <sui-button type="button" color="olive" @click="addLabel()">添加标签</sui-button>
       </sui-form>
 
       <div style="clear:both;"></div>

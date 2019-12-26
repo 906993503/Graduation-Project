@@ -2945,6 +2945,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3023,7 +3024,7 @@ __webpack_require__.r(__webpack_exports__);
     addComment: function addComment() {
       var self = this;
 
-      if (this.user.email_verified_at == null) {
+      if (this.user != null && this.user.email_verified_at == null) {
         this.$router.go(-1);
         var data = [];
         data.push("请先验证邮箱");
@@ -3242,6 +3243,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _env__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../env */ "./resources/js/env.js");
+//
+//
 //
 //
 //
@@ -4037,8 +4040,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 
@@ -4202,7 +4203,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     }
 
-    if (this.user.email_verified_at == null) {
+    if (this.user != null && this.user.email_verified_at == null) {
       this.$router.go(-1);
       var data = [];
       data.push("请先验证邮箱");
@@ -4457,6 +4458,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -4692,6 +4700,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _my_message_MessageItem__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./my_message/MessageItem */ "./resources/js/components/root/my/my_message/MessageItem.vue");
 /* harmony import */ var _my_message_Message__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./my_message/Message */ "./resources/js/components/root/my/my_message/Message.vue");
 /* harmony import */ var _env__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../env */ "./resources/js/env.js");
+//
 //
 //
 //
@@ -58533,7 +58542,7 @@ var render = function() {
             _c(
               "sui-button",
               {
-                attrs: { color: "olive" },
+                attrs: { type: "button", color: "olive" },
                 on: {
                   click: function($event) {
                     return _vm.addLabel()
@@ -58608,7 +58617,7 @@ var render = function() {
               _c(
                 "sui-button",
                 {
-                  attrs: { positive: "" },
+                  attrs: { type: "button", positive: "" },
                   nativeOn: {
                     click: function($event) {
                       return _vm.toggle($event)
@@ -59617,7 +59626,7 @@ var render = function() {
                     _c(
                       "sui-button",
                       {
-                        attrs: { basic: "" },
+                        attrs: { type: "button", basic: "" },
                         nativeOn: {
                           click: function($event) {
                             return _vm.login()
@@ -59638,7 +59647,7 @@ var render = function() {
                     _c(
                       "sui-button",
                       {
-                        attrs: { color: "red" },
+                        attrs: { type: "button", color: "red" },
                         nativeOn: {
                           click: function($event) {
                             return _vm.register()
@@ -59938,6 +59947,7 @@ var render = function() {
               _vm._v(" "),
               _c("sui-button", {
                 attrs: {
+                  type: "button",
                   content: "添加评论",
                   "label-position": "left",
                   icon: "edit",
@@ -60053,6 +60063,7 @@ var render = function() {
             staticClass: "collect-but",
             staticStyle: { position: "absolute", top: "-3rem" },
             attrs: {
+              type: "button",
               icon: "edit",
               "label-position": "left",
               color: "orange",
@@ -60071,6 +60082,7 @@ var render = function() {
             staticClass: "collect-but",
             staticStyle: { position: "absolute" },
             attrs: {
+              type: "button",
               color: "red",
               icon: "heart",
               "label-position": "left",
@@ -60363,131 +60375,150 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.user != null
-    ? _c(
-        "div",
+  return _c(
+    "div",
+    [
+      _c("h1", [_vm._v("文章编辑")]),
+      _vm._v(" "),
+      _vm.active == 0
+        ? _c("div", { staticClass: "ban-reason" }, [
+            _vm._v("\n    文章被驳回！请修改后重新发布\n    "),
+            _c("br"),
+            _vm._v("\n    原因：" + _vm._s(_vm.reason) + "\n  ")
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "sui-grid",
         [
-          _c("h1", [_vm._v("文章编辑")]),
-          _vm._v(" "),
-          _vm.active == 0
-            ? _c("div", { staticClass: "ban-reason" }, [
-                _vm._v("\n    文章被驳回！请修改后重新发布\n    "),
-                _c("br"),
-                _vm._v("\n    原因：" + _vm._s(_vm.reason) + "\n  ")
-              ])
-            : _vm._e(),
-          _vm._v(" "),
           _c(
-            "sui-grid",
+            "sui-grid-row",
             [
               _c(
-                "sui-grid-row",
+                "sui-grid-column",
+                { attrs: { width: 12 } },
                 [
                   _c(
-                    "sui-grid-column",
-                    { attrs: { width: 12 } },
+                    "sui-form",
+                    { staticStyle: { position: "absolute", bottom: "0" } },
                     [
                       _c(
-                        "sui-form",
-                        { staticStyle: { position: "absolute", bottom: "0" } },
+                        "sui-form-fields",
+                        { attrs: { inline: "" } },
                         [
-                          _c(
-                            "sui-form-fields",
-                            { attrs: { inline: "" } },
-                            [
-                              _c("sui-form-field", [
-                                _c("label", [_vm._v("标题：")]),
-                                _vm._v(" "),
-                                _c("input", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.title,
-                                      expression: "title"
-                                    }
-                                  ],
-                                  attrs: { placeholder: "Title" },
-                                  domProps: { value: _vm.title },
-                                  on: {
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
-                                      }
-                                      _vm.title = $event.target.value
-                                    }
-                                  }
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c("sui-form-field", [
-                                _c("label", [_vm._v("所属分类：")]),
-                                _vm._v(" "),
-                                _c(
-                                  "select",
-                                  {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.type_id,
-                                        expression: "type_id"
-                                      }
-                                    ],
-                                    on: {
-                                      change: function($event) {
-                                        var $$selectedVal = Array.prototype.filter
-                                          .call($event.target.options, function(
-                                            o
-                                          ) {
-                                            return o.selected
-                                          })
-                                          .map(function(o) {
-                                            var val =
-                                              "_value" in o ? o._value : o.value
-                                            return val
-                                          })
-                                        _vm.type_id = $event.target.multiple
-                                          ? $$selectedVal
-                                          : $$selectedVal[0]
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _c("option", { attrs: { value: "" } }, [
-                                      _vm._v("尚未选择")
-                                    ]),
-                                    _vm._v(" "),
-                                    _vm._l(_vm.type, function(item) {
-                                      return _c(
-                                        "option",
-                                        {
-                                          key: item.id,
-                                          domProps: { value: item.id }
-                                        },
-                                        [_vm._v(_vm._s(item.name))]
-                                      )
-                                    })
-                                  ],
-                                  2
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "sui-button",
+                          _c("sui-form-field", [
+                            _c("label", [_vm._v("标题：")]),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
                                 {
-                                  attrs: { basic: "" },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.openUpload()
-                                    }
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.title,
+                                  expression: "title"
+                                }
+                              ],
+                              attrs: { placeholder: "Title" },
+                              domProps: { value: _vm.title },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
                                   }
-                                },
-                                [_vm._v("上传封面")]
-                              )
-                            ],
-                            1
+                                  _vm.title = $event.target.value
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("sui-form-field", [
+                            _c("label", [_vm._v("所属分类：")]),
+                            _vm._v(" "),
+                            _c(
+                              "select",
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.type_id,
+                                    expression: "type_id"
+                                  }
+                                ],
+                                on: {
+                                  change: function($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call($event.target.options, function(o) {
+                                        return o.selected
+                                      })
+                                      .map(function(o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return val
+                                      })
+                                    _vm.type_id = $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  }
+                                }
+                              },
+                              [
+                                _c("option", { attrs: { value: "" } }, [
+                                  _vm._v("尚未选择")
+                                ]),
+                                _vm._v(" "),
+                                _vm._l(_vm.type, function(item) {
+                                  return _c(
+                                    "option",
+                                    {
+                                      key: item.id,
+                                      domProps: { value: item.id }
+                                    },
+                                    [_vm._v(_vm._s(item.name))]
+                                  )
+                                })
+                              ],
+                              2
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "sui-button",
+                            {
+                              attrs: { basic: "", type: "button" },
+                              nativeOn: {
+                                click: function($event) {
+                                  return _vm.openUpload()
+                                }
+                              }
+                            },
+                            [_vm._v("上传封面")]
                           )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "sui-grid-column",
+                { attrs: { width: 4 } },
+                [
+                  _c(
+                    "sui-form",
+                    { staticStyle: { position: "absolute", bottom: "0" } },
+                    [
+                      _c(
+                        "sui-form-fields",
+                        { attrs: { inline: "" } },
+                        [
+                          _c("sui-form-field", [
+                            _c("label", [_vm._v("文章封面：")])
+                          ])
                         ],
                         1
                       )
@@ -60495,115 +60526,86 @@ var render = function() {
                     1
                   ),
                   _vm._v(" "),
-                  _c(
-                    "sui-grid-column",
-                    { attrs: { width: 4 } },
-                    [
-                      _c(
-                        "sui-form",
-                        { staticStyle: { position: "absolute", bottom: "0" } },
-                        [
-                          _c(
-                            "sui-form-fields",
-                            { attrs: { inline: "" } },
-                            [
-                              _c("sui-form-field", [
-                                _c("label", [_vm._v("文章封面：")])
-                              ])
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "face-div", style: _vm.facediv },
-                        [
-                          _c("img", {
-                            style: _vm.haveImg,
-                            attrs: { src: _vm.faceimg }
-                          }),
-                          _vm._v(" "),
-                          _c("form", [
-                            _c("input", {
-                              ref: "fileInput",
-                              staticStyle: { display: "none" },
-                              attrs: { accept: "image/*", type: "file" },
-                              on: {
-                                change: function($event) {
-                                  return _vm.tirggerFile($event)
-                                }
-                              }
-                            })
-                          ])
-                        ]
-                      )
-                    ],
-                    1
-                  )
+                  _c("div", { staticClass: "face-div", style: _vm.facediv }, [
+                    _c("img", {
+                      style: _vm.haveImg,
+                      attrs: { src: _vm.faceimg }
+                    }),
+                    _vm._v(" "),
+                    _c("input", {
+                      ref: "fileInput",
+                      staticStyle: { display: "none" },
+                      attrs: { accept: "image/*", type: "file" },
+                      on: {
+                        change: function($event) {
+                          return _vm.tirggerFile($event)
+                        }
+                      }
+                    })
+                  ])
                 ],
                 1
               )
             ],
             1
-          ),
-          _vm._v(" "),
-          _c("quill-editor", {
-            ref: "myQuillEditor",
-            attrs: { options: _vm.editorOption },
-            model: {
-              value: _vm.content,
-              callback: function($$v) {
-                _vm.content = $$v
-              },
-              expression: "content"
-            }
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "bottom-div" }, [
-            _c(
-              "div",
-              { staticClass: "label-div" },
-              [_c("label-item", { attrs: { label: _vm.label } })],
-              1
-            ),
-            _vm._v(" "),
-            _c("div", { staticStyle: { clear: "both" } })
-          ]),
-          _vm._v(" "),
-          _c(
-            "sui-button",
-            {
-              attrs: { basic: "", floated: "right" },
-              nativeOn: {
-                click: function($event) {
-                  return _vm.goBack()
-                }
-              }
-            },
-            [_vm._v("返回")]
-          ),
-          _vm._v(" "),
-          _c(
-            "sui-button",
-            {
-              attrs: { color: "red", floated: "right" },
-              nativeOn: {
-                click: function($event) {
-                  return _vm.saveArticle()
-                }
-              }
-            },
-            [_vm._v("发布")]
-          ),
-          _vm._v(" "),
-          _c("div", { staticStyle: { clear: "both" } })
+          )
         ],
         1
-      )
-    : _vm._e()
+      ),
+      _vm._v(" "),
+      _c("quill-editor", {
+        ref: "myQuillEditor",
+        attrs: { options: _vm.editorOption },
+        model: {
+          value: _vm.content,
+          callback: function($$v) {
+            _vm.content = $$v
+          },
+          expression: "content"
+        }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "bottom-div" }, [
+        _c(
+          "div",
+          { staticClass: "label-div" },
+          [_c("label-item", { attrs: { label: _vm.label } })],
+          1
+        ),
+        _vm._v(" "),
+        _c("div", { staticStyle: { clear: "both" } })
+      ]),
+      _vm._v(" "),
+      _c(
+        "sui-button",
+        {
+          attrs: { type: "button", basic: "", floated: "right" },
+          nativeOn: {
+            click: function($event) {
+              return _vm.goBack()
+            }
+          }
+        },
+        [_vm._v("返回")]
+      ),
+      _vm._v(" "),
+      _c(
+        "sui-button",
+        {
+          attrs: { type: "button", color: "red", floated: "right" },
+          nativeOn: {
+            click: function($event) {
+              return _vm.saveArticle()
+            }
+          }
+        },
+        [_vm._v("发布")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticStyle: { clear: "both" } })
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -60719,7 +60721,7 @@ var render = function() {
       _vm._v(" "),
       _vm.moreItems > 0
         ? _c("sui-button", {
-            attrs: { fluid: "", content: "加载更多" },
+            attrs: { type: "button", fluid: "", content: "加载更多" },
             on: {
               click: function($event) {
                 return _vm.getArticleItemList()
@@ -60847,6 +60849,7 @@ var render = function() {
     [
       _c("sui-button", {
         attrs: {
+          type: "button",
           compact: "",
           icon: "plus",
           "label-position": "left",
@@ -60877,7 +60880,7 @@ var render = function() {
       _vm._v(" "),
       _vm.moreItems > 0
         ? _c("sui-button", {
-            attrs: { fluid: "", content: "加载更多" },
+            attrs: { type: "button", fluid: "", content: "加载更多" },
             on: {
               click: function($event) {
                 return _vm.getArticleItemList()
@@ -61217,7 +61220,7 @@ var render = function() {
       _vm._v(" "),
       _vm.moreItems > 0
         ? _c("sui-button", {
-            attrs: { fluid: "", content: "加载更多" },
+            attrs: { type: "button", fluid: "", content: "加载更多" },
             on: {
               click: function($event) {
                 return _vm.getArticleItemList()
@@ -61258,6 +61261,7 @@ var render = function() {
       _vm.msg_show == null
         ? _c("sui-button", {
             attrs: {
+              type: "button",
               compact: "",
               content: "全部标为已读",
               color: "red",
@@ -61410,7 +61414,7 @@ var render = function() {
       _c(
         "sui-button",
         {
-          attrs: { basic: "", secondary: "", icon: "reply" },
+          attrs: { type: "button", basic: "", secondary: "", icon: "reply" },
           on: {
             click: function($event) {
               return _vm.backList()
@@ -61530,6 +61534,7 @@ var render = function() {
                 "sui-button",
                 {
                   attrs: {
+                    type: "button",
                     color: "blue",
                     icon: "search",
                     labelPosition: "left"
@@ -61556,7 +61561,7 @@ var render = function() {
       _vm._v(" "),
       _vm.moreItems > 0
         ? _c("sui-button", {
-            attrs: { fluid: "", content: "加载更多" },
+            attrs: { type: "button", fluid: "", content: "加载更多" },
             on: {
               click: function($event) {
                 return _vm.getArticleItemList()
@@ -76921,6 +76926,8 @@ var app = new Vue({
             self.$set(self.user, i, data.user[i]);
           }
         }
+
+        console.log(self.user);
       });
     }
 
