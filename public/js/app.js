@@ -4037,6 +4037,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -60524,16 +60526,18 @@ var render = function() {
                             attrs: { src: _vm.faceimg }
                           }),
                           _vm._v(" "),
-                          _c("input", {
-                            ref: "fileInput",
-                            staticStyle: { display: "none" },
-                            attrs: { accept: "image/*", type: "file" },
-                            on: {
-                              change: function($event) {
-                                return _vm.tirggerFile($event)
+                          _c("form", [
+                            _c("input", {
+                              ref: "fileInput",
+                              staticStyle: { display: "none" },
+                              attrs: { accept: "image/*", type: "file" },
+                              on: {
+                                change: function($event) {
+                                  return _vm.tirggerFile($event)
+                                }
                               }
-                            }
-                          })
+                            })
+                          ])
                         ]
                       )
                     ],

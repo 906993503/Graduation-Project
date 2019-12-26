@@ -36,13 +36,15 @@
           </sui-form>
           <div class="face-div" :style="facediv">
             <img :src="faceimg" :style="haveImg" />
-            <input
-              style="display:none;"
-              ref="fileInput"
-              accept="image/*"
-              type="file"
-              @change="tirggerFile($event)"
-            />
+            <form>
+              <input
+                style="display:none;"
+                ref="fileInput"
+                accept="image/*"
+                type="file"
+                @change="tirggerFile($event)"
+              />
+            </form>
           </div>
         </sui-grid-column>
       </sui-grid-row>
