@@ -146,7 +146,7 @@ export default {
         self.$router.go(-1);
         var data = [];
         data.push("请先验证邮箱");
-        env.$emit("msg");
+        env.$emit("msg", data);
       }
       if (self.txt.length < 6) {
         var data = [];

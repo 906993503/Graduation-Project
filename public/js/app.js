@@ -3025,7 +3025,7 @@ __webpack_require__.r(__webpack_exports__);
         self.$router.go(-1);
         var data = [];
         data.push("请先验证邮箱");
-        _env__WEBPACK_IMPORTED_MODULE_1__["default"].$emit("msg");
+        _env__WEBPACK_IMPORTED_MODULE_1__["default"].$emit("msg", data);
       }
 
       if (self.txt.length < 6) {
@@ -4202,7 +4202,7 @@ __webpack_require__.r(__webpack_exports__);
       self.$router.go(-1);
       var data = [];
       data.push("请先验证邮箱");
-      _env__WEBPACK_IMPORTED_MODULE_2__["default"].$emit("msg");
+      _env__WEBPACK_IMPORTED_MODULE_2__["default"].$emit("msg", data);
     }
   },
   mounted: function mounted() {},
