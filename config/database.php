@@ -46,11 +46,11 @@ return [
         'mysql' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', '101.200.90.230'),
+            'host' => env('DB_HOST', 'rm-bp1l7fk83j5hmp55h.mysql.rds.aliyuncs.com'),
             'port' => env('DB_PORT', '3306'),
             'database' => env('DB_DATABASE', 'qaqxm'),
             'username' => env('DB_USERNAME', 'root'),
-            'password' => env('DB_PASSWORD', '3.141592654'),
+            'password' => env('DB_PASSWORD', 'QwQ906993503'),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
