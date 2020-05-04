@@ -46,7 +46,7 @@ return [
         'mysql' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', 'rm-bp1l7fk83j5hmp55h.mysql.rds.aliyuncs.com'),
+            'host' => env('DB_HOST', 'rm-bp1l7fk83j5hmp55hto.mysql.rds.aliyuncs.com'),
             'port' => env('DB_PORT', '3306'),
             'database' => env('DB_DATABASE', 'qaqxm'),
             'username' => env('DB_USERNAME', 'root'),
